@@ -1,1 +1,10 @@
 In here we have the figures that appear in Chapter 5.
+
+We generate all the words of length k on an alphabet Sigma.
+
+def binseq(k):  #constructing all possible words of length k on a given alphabet
+    return [''.join(x) for x in itertools.product("".join(Sigma), repeat=k)]
+    
+We run exact_number_words(P,Simga,K) from Recurrence_Touzet_v1 for all the words of length k generated earlier.
+
+We also run final_no_repeats(w,d,pre,Sigma,[],[]) from Generating_words_v1.

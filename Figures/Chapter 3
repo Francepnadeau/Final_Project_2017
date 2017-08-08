@@ -1,1 +1,64 @@
 In here we present the figures that appear in Chapter 3 of the report.
+
+------------------------------------------------------------
+Section 3.1
+
+We need to implement the function B(k,d,c).
+
+def B(k,d,s):  #the function that gives the upperbound approximation
+    eps=float(d)/float(k)
+    inv_eps=1.0/eps
+    c=inv_eps+math.sqrt(1+pow(inv_eps,2))
+    c1=(c+1.0)/(c-1.0)
+    return(pow(c1,k)*pow(c,d)*pow(s,d))
+    
+We obtain the data for S_2(k,d) from the function S(k,d,s) in Recurrences_Myers_v1.
+
+The figures are obtained by plotting the two functions for d=1,2,3 and keeping s=2.
+
+-------------------------------------------------------------
+Section 3.2
+
+We implement the function F(k,d).
+
+def F2(k,d,s): 
+    return(float(pow((2*s-1),d)*pow(k,d))/float(math.factorial(d)))
+    
+We obtain the figures by plotting the two functions for d=1,2,3,4.
+
+--------------------------------------------------------------
+Section 3.3
+
+We obtain the data for N_D(k) from the functions upperbound(k,d,s) in Recurrences_Myers_v1.
+We obtain the figures by plotting F(k,d) and N_D(k) for d=1,2,3,4 and s=2.
+
+--------------------------------------------------------------
+Section 3.4
+
+We need to implement the recurrences of S_1(k,d).
+
+def sumS1(T,D,s): #insertions before the first symbol of the word.
+    total=0      #corresponds to the term (s^j)S(k-1,d-j) for j from 1 to d
+    for j in range(1,D+1):
+        total+=pow(s,j-1)*S1(T-1,D-j,s)
+    return(total)
+
+def S1(T,D,s):
+    if D==0:
+        return(1)
+    elif D==1 and T==1:
+        return(2*s)
+    elif D>1 and T==1:
+        return((2*s-1)*pow(s,D-1))
+    else:
+        total=S1(T-1,D,s)+S1(T-1,D-1,s)+(2*s-1)*sumS1(T,D,s)
+        return(total)
+
+We plot F2(k,d), S_1(k,d) and S_2(k,d) on the same graph for d=1,2,3,4 and an alphabet of size s=2.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+We implement the asymptotic function of S_1(k,d).
+
+def F1(k,d,s): 
+    return(float(pow(2*s,d)*pow(k,d))/float(math.factorial(d)))
+    
+For each values of d from 1 to 4, we plot F1(k,d) and F2(k,d) with s=2,4,20.
